@@ -87,6 +87,11 @@ func GetAllFiles(dirPth string, filter Filter) (files []string, err error) {
 	return files, nil
 }
 
+func IsExist(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil || os.IsExist(err)
+}
+
 const DocumentDirPath = "docs"
 
 func init() {
@@ -107,6 +112,13 @@ func init() {
 	//		Url:  "https://petstore.swagger.io/v2/swagger.json",
 	//	},
 	//}
+
+	if !IsExist(DocumentDirPath) {
+		if err := os.Mkdir(DocumentDirPath, os.ModePerm); err != nil {
+			panic(err)
+		}
+	}
+
 	filePaths, err := GetAllFiles(DocumentDirPath, func(filename string) bool {
 		return strings.HasSuffix(filename, ".swagger.json")
 	})
@@ -171,7 +183,7 @@ func AddDocuments(c *gin.Context) {
 	out, err := os.Create("docs/" + filepath.Base(header.Filename))
 	if err != nil {
 		fmt.Println(err)
-		c.String(http.StatusInternalServerError, "internal error")
+		c.String(http.StatusInternalServerError, fmt.Sprintf("internal error: %s", err.Error()))
 		return
 	}
 	defer out.Close()
