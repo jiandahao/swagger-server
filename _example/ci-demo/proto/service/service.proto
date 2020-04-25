@@ -1,8 +1,28 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
-
+import "protoc-gen-swagger/options/annotations.proto";
 package account;
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+	info: {
+		title: "用户认证相关接口";
+		version: "1.0.0";
+		license: {
+			name: "BSD 3-Clause License";
+			url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
+		};
+	};
+	host: "{project_id}.xbase.xyz";
+	schemes: HTTPS;
+	schemes: HTTP;
+	consumes: "application/json";
+	external_docs: {
+		description: "更多详情，请点击这里查看";
+		url: "http://www.baidu.com";
+	};
+};
+
 
 service AccountCreator{//定义一个服务
 	//定义一个rpc方法，指定请求和响应类型。
