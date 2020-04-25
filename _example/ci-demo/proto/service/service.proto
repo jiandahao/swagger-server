@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package account;
+
+service AccountCreator{//定义一个服务
+	//定义一个rpc方法，指定请求和响应类型。
+	rpc CreateAccount (AccountRegister) returns (RegisterStatus) {
+	        option (google.api.http) = {
+                post: "/v1/auth/signin"
+                body:"*"
+            };
+	}
+}
+
+message AccountRegister {
+	string username = 1;
+	string email = 2;
+}
+
+message RegisterStatus {
+	string status = 3;
+}

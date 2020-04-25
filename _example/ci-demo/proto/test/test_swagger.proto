@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+package test;
+
+//https://github.com/grpc-ecosystem/grpc-gateway/blob/ab0345bb328757bfef2f3d7d4e642e182eb985b9/examples/proto/examplepb/a_bit_of_everything.proto
+//option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+//  info: {
+//    title: "用户认证相关接口";
+//    version: "1.0.0";
+//    license: {
+//      name: "BSD 3-Clause License";
+//      url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
+//    };
+//  };
+//  host: "{project_id}.{demo}.xbase.xyz";
+//  schemes: HTTPS;
+//  schemes: HTTP;
+//  consumes: "application/json";
+//  // Overwriting host entry breaks tests, so this is not done here.
+//  external_docs: {
+//    url: "https://github.com/grpc-ecosystem/grpc-gateway";
+//    description: "More about gRPC-Gateway";
+//  }
+//};
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+  info: {
+    title: "用户认证相关接口";
+    version: "1.0.0";
+    license: {
+      name: "BSD 3-Clause License";
+      url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
+    };
+  };
+  host: "{project_id}.{xbase}.xyz";
+  schemes: HTTPS;
+  consumes: "application/json";
+};
+
+service TestAccountCreator{//定义一个服务
+  //定义一个rpc方法，指定请求和响应类型。
+  rpc CreateAccount (AccountRegister) returns (RegisterStatus) {
+    option (google.api.http) = {
+      post: "/v1/auth/signin"
+      body:"*"
+    };
+  }
+  // 删除帐号
+  rpc DeleteAccount (AccountRegister) returns (RegisterStatus) {}
+}
+
+message AccountRegister {
+  //用户名
+  string username = 1;
+  //邮箱
+  string email = 2;
+}
+
+message RegisterStatus {
+  //注册状态
+  string status = 3;
+}

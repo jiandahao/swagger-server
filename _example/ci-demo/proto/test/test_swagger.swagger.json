@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "用户认证相关接口",
+        "version": "1.0.0",
+        "license": {
+            "name": "BSD 3-Clause License",
+            "url": "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt"
+        }
+    },
+    "paths": {
+        "/v1/auth/signin": {
+            "post": {
+                "summary": "定义一个rpc方法，指定请求和响应类型。",
+                "operationId": "CreateAccount",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/testswaggerRegisterStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/testswaggerAccountRegister"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "AccountCreator"
+                ]
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "More about gRPC-Gateway",
+        "url": "https://github.com/grpc-ecosystem/grpc-gateway"
+    },
+    "servers": [
+        {
+            "url": "https://{project_id}.xbase.xyz",
+            "variables": {
+                "project_id": {
+                    "default": "unknown"
+                }
+            }
+        },
+        {
+            "url": "http://{project_id}.xbase.xyz",
+            "variables": {
+                "project_id": {
+                    "default": "unknown"
+                }
+            }
+        }
+    ],
+    "components": {
+        "schemas": {
+            "testswaggerAccountRegister": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "title": "用户名"
+                    },
+                    "email": {
+                        "type": "string",
+                        "title": "邮箱"
+                    }
+                }
+            },
+            "testswaggerRegisterStatus": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "title": "注册状态"
+                    }
+                }
+            }
+        }
+    }
+}

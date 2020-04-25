@@ -1,0 +1,19 @@
+before_script:
+  - go_build.sh
+test:
+  script:
+    - env
+    - docker_build.sh -p test
+  except:
+    - tags
+  tags:
+    - docker
+release:
+  script:
+    - env
+    - docker_build.sh -p release
+    - swagger_deploy.sh --namespace xlppc
+  only:
+    - tags
+  tags:
+    - docker
