@@ -1,0 +1,6 @@
+docs:
+  - name: "Account Service"
+    url: ./test_swagger.swagger.json
+    external_docs:
+      description: "escription external docs of test swagger"
+      url: "http://www.baidu.com"
