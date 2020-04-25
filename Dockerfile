@@ -1,11 +1,11 @@
-#FROM mermade/swagger2openapi:latest
-#COPY pkg/swagger /swagger/
-#ADD swagger2openapi.sh /usr/local/bin/
-#WORKDIR /swagger/
-#RUN /usr/local/bin/swagger2openapi.sh
-# swagger-ui
-# TODO： 更改镜像
-FROM gitlab.xunlei.cn/xbase/swagger-ui:v0.9.3
-COPY bin/swagger-server /usr/local/bin
+FROM jiandahao/swagger-ui:v1.0.0 as swagger_ui
 
+FROM golang:1.13
+# Copy swagger ui dist package
+COPY --from=swagger_ui /usr/share/nginx/html/ /swagger-server/dist/
+COPY bin/swagger-server /swagger-server/
+COPY template /swagger-server/
+
+WORKDIR /swagger-server/
+EXPOSE 8088
 CMD ["./swagger-server"]
