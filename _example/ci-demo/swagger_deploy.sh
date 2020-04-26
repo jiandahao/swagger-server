@@ -19,5 +19,5 @@ do
   -H "Content-Type: multipart/form-data" \
   -F "file=@${file}" \
  ${HOST}/new
-#  docker run --rm -v $(pwd):$(pwd) -w $(pwd) jiandahao/swagger-gen-cli:v1.0.0 --namespace=xlppc --server-host=127.0.0.1:8088
+#  docker run --rm -v $(pwd):$(pwd) -w $(pwd) jiandahao/swagger-gen-cli:v1.0.0 --namespace=demo --server-host=127.0.0.1:8088
 done
