@@ -7,15 +7,22 @@ swagger server支持动态添加api文档，结合swagger ui，方便实现服�
 
 - 如何使用
 
-  启动服务
+  **启动服务**
   ```bash
   # 编译
   ./build.sh
   # 执行程序
   ./bin/swagger-server
   ```
+  
+  也可以通过docker完成服务部署：
+  ```bash
+  docker run -d -p 8088:8088 -v ${PWD}/docs:/swagger-server/docs jiandahao/swagger_server:v1.0.0
+  ```
+  
+  `${PWD}/docs:/swagger-server/docs`挂载存放api文档的目录。
 
-  添加api文档
+  **添加api文档**
   ```bash
   curl -X POST -H "Content-Type: multipart/form-data" -F "file=@${PWD}/_example/test_swagger.swagger.json" 127.0.0.1:8088/new
   ```
