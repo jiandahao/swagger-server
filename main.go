@@ -120,7 +120,7 @@ func init() {
 	}
 
 	filePaths, err := GetAllFiles(DocumentDirPath, func(filename string) bool {
-		return strings.HasSuffix(filename, ".swagger.json")
+		return strings.HasSuffix(filename, "swagger.json")
 	})
 
 	if err != nil {
