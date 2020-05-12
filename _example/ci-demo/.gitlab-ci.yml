@@ -12,7 +12,7 @@ release:
   script:
     - env
     - docker_build.sh -p release
-    - swagger_deploy.sh --namespace xlppc
+    - swagger_deploy.sh
   only:
     - tags
   tags:

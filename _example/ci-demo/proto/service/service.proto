@@ -13,7 +13,7 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
 			url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
 		};
 	};
-	host: "{project_id}.xbase.xyz";
+	host: "{project_id}.demo.xyz";
 	schemes: HTTPS;
 	schemes: HTTP;
 	consumes: "application/json";

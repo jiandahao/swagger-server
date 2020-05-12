@@ -12,13 +12,12 @@ docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) \
 
 docker run --rm -v $(pwd):$(pwd) -w $(pwd) mermade/swagger2openapi:latest sh swagger2openapi.sh
 
-export HOST="http://47.244.202.189:8080"
-#export HOST="http://127.0.0.1:8088"
+export HOST="http://127.0.0.1:8088"
 for file in `find ./swagger -type f -name '*.swagger.json' | xargs echo`
 do
   curl -X POST \
   -H "Content-Type: multipart/form-data" \
   -F "file=@${file}" \
  ${HOST}/new
-#  docker run --rm -v $(pwd):$(pwd) -w $(pwd) jiandahao/swagger-gen-cli:v1.0.0 --namespace=xlppc --server-host=127.0.0.1:8088
+#  docker run --rm -v $(pwd):$(pwd) -w $(pwd) jiandahao/swagger-gen-cli:v1.0.0 --namespace=demo --server-host=127.0.0.1:8088
 done
